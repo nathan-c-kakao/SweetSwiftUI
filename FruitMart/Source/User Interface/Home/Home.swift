@@ -9,13 +9,24 @@
 import SwiftUI
 
 struct Home: View {
-  var body: some View {
-    Text("Hello, World!")
-  }
+    let store: Store
+    
+    var body: some View {
+        NavigationView {
+            List(store.products, id: \.name) { product in
+                NavigationLink(destination: ProductDetailView(product: product)) {
+                    ProductRow(product: product)
+                }
+            }
+            .navigationBarTitle("과일마트")
+        }
+    }
 }
 
 struct Home_Previews: PreviewProvider {
   static var previews: some View {
-    Home()
+//    Home(store: Store())
+    Preview(source: Home(store: Store()))
   }
 }
+
